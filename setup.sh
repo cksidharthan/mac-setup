@@ -137,6 +137,9 @@ brew install hadolint
 brew install watch
 brew install vue-cli
 brew install go
+brew install zsh-syntax-highlighting
+brew install zsh-autosuggestions
+brew install zsh-you-should-use
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
@@ -157,6 +160,7 @@ echo "-- Still to do --"
 echo "-----------------"
 echo "1. Set Jebrains Mono as the default font in iTerm2, Goland, and Visual Studio Code"
 echo "2. Set the default shell to zsh"
+echo "3. Install eclipse keymap for Goland"
 
 source ~/.zshrc
 

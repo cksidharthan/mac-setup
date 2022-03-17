@@ -19,10 +19,12 @@ plugins=(
   kubectl 
   history 
   zsh-autosuggestions 
-  zsh-syntax-highlighting 
+  zsh-syntax-highlighting
+  you-should-use
   alias-finder
 )
 source $ZSH/oh-my-zsh.sh
+# source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 
 # User configuration
 
@@ -56,6 +58,12 @@ alias k="kubectl"
 alias kn="kubectl -n rc-system"
 alias watch="watch -n .5"
 #alias history="history -f"
+alias g="git"
+alias ga="git add"
+alias gc="git commit -m"
+alias gs="git status"
+alias gpuf="git push -f"
+alias gri="git rebase -i"
 
 # Reynen court Links
 alias cr="open https://certified-registry.rcplatform.io"
