@@ -65,6 +65,7 @@ alias ga="git add"
 alias gc="git commit -m"
 alias gs="git status"
 alias gpuf="git push -f"
+alias gpl="git pull"
 alias gri="git rebase -i"
 
 # Reynen court Links
@@ -79,3 +80,4 @@ alias paperdocs="open https://paper.dropbox.com"
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
+export GOSUMDB=off
