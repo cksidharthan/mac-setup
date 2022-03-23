@@ -5,6 +5,20 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="frisk" # set by `omz`
 
+# To Display the time taken for previous command to run
+
+ifunction preexec() {
+    timer=${timer:-$SECONDS}
+}
+
+function precmd() {
+    if [ $timer ]; then
+        timer_show=$(($SECONDS - $timer))
+        timer_show=$(printf '%.*f\n' 3 $timer_show)
+        export RPROMPT="${timer_show}s"
+        unset timer
+    fi
+}
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -65,8 +79,9 @@ alias ga="git add"
 alias gc="git commit -m"
 alias gs="git status"
 alias gpuf="git push -f"
-alias gpl="git pull"
+alias gpu="git pull"
 alias gri="git rebase -i"
+alias mk="minikube"
 
 # Reynen court Links
 alias cr="open https://certified-registry.rcplatform.io"
