@@ -152,6 +152,8 @@ chsh -s $(which zsh)
 # zsh settings
 cp .frisk.zsh-theme ~/.oh-my-zsh/themes/
 cp .zshrc ~/.zshrc
+mkdir -p ~/.vim/plugconf
+cp coc-conf.vim ~/.vim/plugconf/
 cp .vimrc ~/.vimrc
 cp .gitconfig ~/.gitconfig
 
@@ -163,5 +165,9 @@ echo "2. Set the default shell to zsh"
 echo "3. Install eclipse keymap for Goland"
 
 source ~/.zshrc
+
+vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall
+vim -R -s -u +GoInstallBinaries +qall
+vim -E -s -u +CocInstall coc-yaml coc-json coc-tsserver coc-go 
 
 echo "You're done!"

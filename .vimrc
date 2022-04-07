@@ -1,188 +1,109 @@
-set nocompatible               " be iMproved
-filetype off                   " required!
+call plug#begin()
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'sharkdp/bat'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-test/vim-test'
+call plug#end()
 
-set rtp+=~/.vim/bundle/Vundle.vim
+try
+	source ~/.vim/plugconf/coc-conf.vim
+catch
+	echo "unable to load coc-conf file"
+endtry
 
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-rails.git'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin '907th/vim-auto-save'
-Plugin 'w0rp/ale'
-
-" Syntax Highlighting
-Plugin 'vim-scripts/Io-programming-language-syntax'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'kchmck/vim-coffee-script'
-
-" Colorscheme
-Plugin 'joshdick/onedark.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Line numbers
+set number
+highlight LineNr ctermfg=grey
+set signcolumn=yes
+set wildmenu
+filetype plugin indent on
+set autowrite
 
 " Theme
-let g:airline_theme='onedark'
-let g:airline_powerline_fonts = 1
+set background=dark
+colorscheme PaperColor
 
-call vundle#end()
+" Switch between buffers
+" nnoremap <C-j> :bprev<CR>
+" nnoremap <C-k> :bnext<CR>
 
-filetype plugin indent on
+" Go syntax highlighting
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
 
-" Remove the ugly splits separator
-set fillchars=vert:\|
-hi VertSplit term=NONE cterm=NONE gui=NONE ctermfg=DarkGrey
+"Auto formatting and importing
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
 
-" tabstop settings
-set autoindent
-set smartindent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+" Status line types/signatures
+let g:go_auto_type_info = 1
 
-" Set to auto read when a file is changed from the outside
-set autoread
+" Run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
 
-" show matching parenthesis/brace/bracket
-set showmatch
+" Map keys for most used commands.
+" Ex: `\b` for building, `\r` for running and `\b` for running test.
+" autocmd FileType go nmap <leader>b :<C-b>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
-" show statusline containing current cursor position
-set ruler
+nnoremap <C-n> :NERDTreeToggle<CR> "  Toggle side window with `CTRL+f`.
 
-" don't highlight search matches
-set nohls
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+" let NERDTreeShowHidden=1 " Show hidden file
 
-" use backspaces like all other programs
-set backspace=indent,eol,start
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
 
-" Ignore case when searching
-set ignorecase
-
-" When searching try to be smart about cases 
-set smartcase
-
-" Makes search act like search in modern browsers
-set incsearch
-
-" line numbers
-set number
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-" Turn off bells
-set noerrorbells  " don't beep
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
-" always show statusline
+" Lightline settings
 set laststatus=2
 
-set t_Co=256
+" Fzf Settings
+" search for files
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+let $FZF_DEFAULT_COMMAND='find . \( -name vendor -o -name .git -o -name node_modules \) -prune -o -print'
+nnoremap <C-h> :Ag<CR>
+" <C-t> to open in a new tab
+" <C-v> to open in vertical split
+" <C-x> to open in horizontal split>
+"
+" Preview window colors
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'""
 
-" syntax highlighting on, if the terminal has colors
-if &t_Co > 2 || has("gui_running")
-    syntax on
-endif
-
-" set title in console title bar
-set title
-
-" map leader key to ,
-let mapleader = ","
-
-" toggle spellcheck with ,s
-nmap <silent> <leader>s :set spell!<CR>
-
-" vim-gitgutter
-nmap <leader>h :GitGutterLineHighlightsToggle<CR>
-
-" toggle the NERDTree
-nmap <leader>n :NERDTreeToggle<CR>
-nnoremap <silent> <Leader>m :NERDTreeFind<CR>
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-s2)
-
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-hi EasyMotionTarget ctermbg=none ctermfg=Yellow
-
-hi EasyMotionTarget2First ctermbg=none ctermfg=red
-hi EasyMotionTarget2Second ctermbg=none ctermfg=lightred
-
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit'
-      \ }
-nnoremap <c-p> :FZF<cr>
-augroup fzf
-  autocmd!
-  autocmd! FileType fzf
-  autocmd  FileType fzf set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-augroup END
+" Coc Settings
+let g:coc_global_extensions = [
+	\ 'coc-pairs',
+	\ 'coc-go',
+	\ 'coc-json',
+	\ 'coc-yaml',
+	\ 'coc-prettier',
+	\ 'coc-tsserver',
+	\ 'coc-eslint',
+	\ ]
 
 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
-" Use The Silver Searcher over grep, iff possible
-if executable('ag')
-   " Use ag over grep
-   set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" Silver Searcher
-nnoremap <Leader>p :Ag<enter>
-
-" grep/Ack/Ag for the word under cursor
-" vnoremap <leader>a y:grep! "\b<c-r>"\b"<cr>:cw<cr>
-" nnoremap <leader>a :grep! "\b<c-r><c-w>\b"
-vnoremap <leader>a y:Ag <c-r><cr>:cw<cr><enter>
-nnoremap <leader>a :Ag <c-r><c-w><enter>
-
-nnoremap <Leader>v :vsplit<enter>
-nnoremap <Leader>s :split<enter>
-
-" Use shift-H and shift-L for move to beginning/end
-nnoremap <S-h> 0
-nnoremap <S-l> $
-
-nmap <silent> <Leader>t :tabnew<CR>
-nmap <silent> <C-N> :tabprevious<CR>
-nmap <silent> <C-M> :tabnext<CR>
-nmap <silent> <Leader>d :tabe %<CR>
-
-let g:NERDTreeNodeDelimiter = "\u00a0"
-
-let g:onedark_termcolors=16
-set termguicolors
-
-colorscheme onedark
-
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
