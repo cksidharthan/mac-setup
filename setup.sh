@@ -103,27 +103,31 @@ brew install --cask --appdir="/Applications" postman
 brew install --cask --appdir="/Applications" google-chrome
 brew install --cask --appdir="/Applications" appcleaner
 
-brew install docker-compose \
-    minikube \
-    jq \
-    node \
-    npm \
-    wget \
-    neovim \
-    neofetch \
-    yamllint \
-    hadolint \
-    watch \
-    go \
-    zsh-syntax-highlighting \
-    zsh-autosuggestions \
-    zsh-you-should-use \
-    starship \
-    zsh-autosuggestions \
-    zsh-syntax-highlighting \
-    azure-cli \
-    k6 \
-    fzf
+brew install docker-compose
+brew install minikube
+brew install jq
+brew install node
+brew install npm
+brew install wget
+brew install neovim
+brew install neofetch
+brew install yamllint
+brew install hadolint
+brew install watch
+brew install go
+brew install zsh-syntax-highlighting
+brew install zsh-autosuggestions
+brew install zsh-you-should-use
+brew install starship
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
+brew install azure-cli
+brew install k6
+brew install fzf
+
+## Add certain folders to favourites in finder
+echo "Adding folders to favourites in finder..."
+
 
 # Install bun
 brew tap oven-sh/bun # for macOS and Linux
@@ -165,10 +169,26 @@ $(brew --prefix)/opt/fzf/install --all
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# Create dev folder where all projects will be cloned to
+mkdir /Users/sid/dev
+open .
+
+# Set natural scrolling to off
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Set two finger tap to right click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+
 source ~/.zshrc
 echo "\n\n\n"
 echo "You're done!"
 echo "------------------------------"
-echo "You still need to install Amphetamine, Magnet and other apps manually from the App Store."
-echo "Please restart your computer to complete the installation"
+echo "Please do the following manually"
+echo "1) Install the following from the App Store:"
+echo "   - Magnet"
+echo "   - Amphetamine"
+echo "   - Microsoft Remote Desktop"
+echo "   - TickTick"
+echo \n
+echo "2) Add dev folder to favourites in finder"
 echo "------------------------------"
