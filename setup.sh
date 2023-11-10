@@ -11,8 +11,12 @@ while true; do
 done 2>/dev/null &
 
 # Setup Finder Commands
-# Show Library Folder in Finder
+# Show Library, Downloads, Desktop, Documents and home in Finder Sidebar favorites
 chflags nohidden ~/Library
+chflags nohidden ~/Downloads
+chflags nohidden ~/Desktop
+chflags nohidden ~/Documents
+chflags nohidden ~
 
 # Show Hidden Files in Finder
 defaults write com.apple.finder AppleShowAllFiles YES
@@ -71,7 +75,7 @@ fi
 
 # Setup Homebrew
 echo "Setting up Homebrew..."
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/sid/.zprofile
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ${HOME}/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
 brew analytics off
 brew update
@@ -81,13 +85,9 @@ brew upgrade
 # Install oh-my-zsh
 echo "Installing oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-echo "Need to logout now to start the new SHELL..."
-
-# Install Git
-echo "Installing Git..."
-brew install git
 
 # Development tool casks
+brew install git
 brew install --cask --appdir="/Applications" visual-studio-code
 brew install --cask --appdir="/Applications" firefox
 brew install --cask --appdir="/Applications" slack
@@ -124,14 +124,9 @@ brew install azure-cli
 brew install k6
 brew install fzf
 brew install zoxide
-
-## Add certain folders to favourites in finder
-echo "Adding folders to favourites in finder..."
-
-
-# Install bun
-brew tap oven-sh/bun # for macOS and Linux
+brew tap oven-sh/bun
 brew install bun
+brew install go-task
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
@@ -170,7 +165,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Create dev folder where all projects will be cloned to
-mkdir /Users/sid/dev
+mkdir ${HOME}/dev
 open .
 
 # Set natural scrolling to off
@@ -180,6 +175,7 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
 source ~/.zshrc
+
 echo "\n\n\n"
 echo "You're done!"
 echo "------------------------------"
@@ -189,6 +185,8 @@ echo "   - Magnet"
 echo "   - Amphetamine"
 echo "   - Microsoft Remote Desktop"
 echo "   - TickTick"
-echo \n
 echo "2) Add dev folder to favourites in finder"
+echo "3)  Add the generated ssh keys to github. Run the following command:"
+echo "   - cat ~/.ssh/id_rsa.pub | pbcopy"
+echo "4) Get the Github Personal Access Token and add it to .zshrc"
 echo "------------------------------"

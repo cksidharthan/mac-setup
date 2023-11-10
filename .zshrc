@@ -55,6 +55,7 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
 export GIT_TERMINAL_PROMPT=1
 export GOSUMDB=off
+export GOPRIVATE="dev.azure.com/INGCDaaS/*,dev.azure.com/IngEurCDaaS01/*,github.com/weportfolio/*"
 
 # go Project commands
 alias golint="go vet ./..."
