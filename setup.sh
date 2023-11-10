@@ -89,8 +89,6 @@ brew install git
 
 # Development tool casks
 brew install --cask --appdir="/Applications" visual-studio-code
-
-# Misc casks
 brew install --cask --appdir="/Applications" firefox
 brew install --cask --appdir="/Applications" slack
 brew install --cask --appdir="/Applications" goland
@@ -102,6 +100,7 @@ brew install --cask --appdir="/Applications" arc
 brew install --cask --appdir="/Applications" postman
 brew install --cask --appdir="/Applications" google-chrome
 brew install --cask --appdir="/Applications" appcleaner
+brew install --cask --appdir="/Applications" powershell
 
 brew install docker-compose
 brew install minikube
@@ -124,6 +123,7 @@ brew install zsh-syntax-highlighting
 brew install azure-cli
 brew install k6
 brew install fzf
+brew install zoxide
 
 ## Add certain folders to favourites in finder
 echo "Adding folders to favourites in finder..."
