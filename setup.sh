@@ -114,9 +114,6 @@ brew install yamllint
 brew install hadolint
 brew install watch
 brew install go
-brew install zsh-syntax-highlighting
-brew install zsh-autosuggestions
-brew install zsh-you-should-use
 brew install starship
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
