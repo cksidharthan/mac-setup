@@ -58,6 +58,18 @@ defaults write com.apple.dock autohide-delay -float 0
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
+# Turn off Startup Sound
+sudo nvram StartupMute=%01
+
+# Turn on Key Repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Make the Keyrepeat a bit fast not too fast
+defaults write NSGlobalDomain KeyRepeat -int 3
+
+# Key Repeat initial delay
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
 # Move files
 cp .zshrc ~/.zshrc
 cp .gitconfig ~/.gitconfig
@@ -163,7 +175,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # Create dev folder where all projects will be cloned to
 mkdir ${HOME}/dev
-open .
 
 # Set natural scrolling to off
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
@@ -173,7 +184,9 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 
 source ~/.zshrc
 
-echo "\n\n\n"
+# Print the below messages in green
+tput setaf 2;
+echo "\n\n"
 echo "You're done!"
 echo "------------------------------"
 echo "Please do the following manually"
@@ -186,4 +199,9 @@ echo "2) Add dev folder to favourites in finder"
 echo "3)  Add the generated ssh keys to github. Run the following command:"
 echo "   - cat ~/.ssh/id_rsa.pub | pbcopy"
 echo "4) Get the Github Personal Access Token and add it to .zshrc"
+echo "5) Run the below command in Powershell to use homebrew in powershell"
+echo "   - Add-Content -Path $PROFILE.CurrentUserAllHosts -Value '$(/opt/homebrew/bin/brew shellenv) | Invoke-Expression'"
+echo "\n"
 echo "------------------------------"
+echo "Completed. Please restart the machine for all changed to be applied :)" 
+echo "------------------------------"; tput sgr0

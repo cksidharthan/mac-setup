@@ -65,6 +65,8 @@ export HELM_EXPERIMENTAL_OCI=1
 
 alias keyRepeatOn="defaults write -g ApplePressAndHoldEnabled -bool false"
 alias keyRepeatOff="defaults write -g ApplePressAndHoldEnabled -bool true"
+alias startupSoundOff="sudo nvram StartupMute=%01"
+alias startupSoundOn="sudo nvram StartupMute=%00"
 
 # Kubernetes Autocompletions
 autoload -Uz compinit
