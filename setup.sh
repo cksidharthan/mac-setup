@@ -182,6 +182,12 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Set two finger tap to right click
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 
+# Remove Recents from Dock
+defaults write com.apple.dock show-recents -bool false
+
+# Set Dock to auto hide
+defaults write com.apple.dock autohide -bool true
+
 source ~/.zshrc
 
 # Print the below messages in green
