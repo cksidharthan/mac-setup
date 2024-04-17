@@ -210,6 +210,9 @@ defaults write com.apple.dock autohide -bool true
 # Add custom nvim config
 git clone http://github.com/cksidharthan/nvim ${HOME}/dev/learn/nvim
 
+# move wezterm config to home
+cp .wezterm.lua ${HOME}
+
 source ~/.zshrc
 
 # Print the below messages in green
