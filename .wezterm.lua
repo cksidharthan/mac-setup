@@ -9,20 +9,25 @@ config.window_background_opacity = 0.95;
 config.bold_brightens_ansi_colors = true;
 
 config.font_size = 15.0;
-config.line_height = 1.2;
+config.line_height = 1.0;
 config.disable_default_key_bindings = true;
 
 -- split the window horizontally
 config.keys = {
     -- {key="|", mods="CTRL", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
     -- split the window horizontally at the bottom with a line of 10
-    {key="|", mods="CTRL", action=wezterm.action.SplitPane{
+    {key="H", mods="CTRL", action=wezterm.action.SplitPane{
         direction = "Down",
         size = {
-            Percent = 10,
+          Percent = 25,
         }
     }},
-    {key="\\", mods="CTRL", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
+    {key="V", mods="CTRL", action=wezterm.action.SplitPane{
+        direction = "Right",
+        size = {
+          Percent = 50,
+        }
+    }},
     -- toggle the horizontal split
     {key="-", mods="CTRL", action=wezterm.action{ActivatePaneDirection="Up"}},
     -- Show the selector, using the quick_select_alphabet
