@@ -10,6 +10,7 @@ config.bold_brightens_ansi_colors = true;
 
 config.font_size = 15.0;
 config.line_height = 1.0;
+-- config.disable_default_key_bindings = true;
 
 -- split the window horizontally
 config.keys = {
@@ -38,7 +39,10 @@ config.keys = {
 }
 
 config.window_padding = {
-    bottom = 0,
+    bottom = 2,
+    left = 15,
+    right = 0,
+    top = 2,
 }
 
 return config;
