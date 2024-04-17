@@ -1,7 +1,21 @@
 #!/bin/zsh
 
 # Ask for the administrator password upfront.
+echo "Please enter your password so we can install some packages."
 sudo -v
+
+# Generating ssh keys
+echo "Generating ssh keys using Keygen"
+# run ssh-keygen with default settings
+ssh-keygen -t rsa -b 4096 -C "" -f ~/.ssh/id_rsa -q -N ""
+
+## cat the public key to the terminal
+cat ~/.ssh/id_rsa.pub
+
+echo "Please add the above ssh key to your github account and press any key to continue"
+
+# Wait for user to press any key
+read -n 1 -s
 
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do
@@ -43,9 +57,6 @@ defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screen
 # Save screenshots to the Pictures/Screenshots
 mkdir ${HOME}/Pictures/Screenshots
 defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
-
-# Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Empty Trash securely by default
 defaults write com.apple.finder EmptyTrashSecurely -bool true
@@ -96,13 +107,12 @@ brew upgrade
 # Update the Terminal
 # Install oh-my-zsh
 echo "Installing oh-my-zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Development tool casks
 brew install git
 brew install --cask --appdir="/Applications" visual-studio-code
 brew install --cask --appdir="/Applications" firefox
-brew install --cask --appdir="/Applications" slack
 brew install --cask --appdir="/Applications" goland
 brew install --cask --appdir="/Applications" github
 brew install --cask --appdir="/Applications" iterm2
@@ -113,6 +123,7 @@ brew install --cask --appdir="/Applications" postman
 brew install --cask --appdir="/Applications" google-chrome
 brew install --cask --appdir="/Applications" appcleaner
 brew install --cask --appdir="/Applications" powershell
+brew install --cask --appdir="/Applications" rectangle
 
 brew install docker-compose
 brew install minikube
@@ -124,7 +135,11 @@ brew install neovim
 brew install neofetch
 brew install yamllint
 brew install hadolint
+brew install kubectl
+brew install helm
 brew install watch
+brew install ripgrep
+brew install bat
 brew install go
 brew install starship
 brew install zsh-autosuggestions
@@ -136,6 +151,8 @@ brew install zoxide
 brew tap oven-sh/bun
 brew install bun
 brew install go-task
+brew install lazygit
+brew install --cask wezterm
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
@@ -160,6 +177,8 @@ go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest
 go install go.uber.org/mock/mockgen@latest
 go install github.com/nikolaydubina/go-cover-treemap@latest
 go install github.com/securego/gosec/v2/cmd/gosec@latest
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install github.com/go-delve/liner@latest
 
 # Install NPM Packages
 npm install -g @redocly/cli@latest
@@ -187,6 +206,9 @@ defaults write com.apple.dock show-recents -bool false
 
 # Set Dock to auto hide
 defaults write com.apple.dock autohide -bool true
+
+# Add custom nvim config
+git clone http://github.com/cksidharthan/nvim ${HOME}/dev/learn/nvim
 
 source ~/.zshrc
 
