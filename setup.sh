@@ -154,6 +154,7 @@ brew install go-task
 brew install lazygit
 brew install --cask wezterm
 brew install ripgrep
+brew install gnu-sed
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
