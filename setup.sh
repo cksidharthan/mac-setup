@@ -155,6 +155,7 @@ brew install lazygit
 brew install --cask wezterm
 brew install ripgrep
 brew install gnu-sed
+brew install helm-ls
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
