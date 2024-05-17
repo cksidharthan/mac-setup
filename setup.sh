@@ -156,6 +156,7 @@ brew install --cask wezterm
 brew install ripgrep
 brew install gnu-sed
 brew install helm-ls
+brew install tmux
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
@@ -215,6 +216,9 @@ git clone http://github.com/cksidharthan/nvim ${HOME}/dev/learn/nvim
 
 # move wezterm config to home
 cp .wezterm.lua ${HOME}
+
+# move tmux conf to home
+cp .tmux.conf ${HOME}
 
 source ~/.zshrc
 
