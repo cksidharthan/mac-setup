@@ -46,6 +46,15 @@ alias mk="minikube"
 alias python="python3"
 alias cd="z"
 
+# tmux alpases
+alias tn="tmux new -s"
+alias ta="tmux attach -t"
+alias tl="tmux ls"
+alias td="tmux detach"
+alias tk="tmux kill-session -t"
+alias tka="tmux kill-session -a"
+alias tks="tmux kill-session -a"
+
 # IP
 alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
@@ -67,6 +76,9 @@ alias keyRepeatOn="defaults write -g ApplePressAndHoldEnabled -bool false"
 alias keyRepeatOff="defaults write -g ApplePressAndHoldEnabled -bool true"
 alias startupSoundOff="sudo nvram StartupMute=%01"
 alias startupSoundOn="sudo nvram StartupMute=%00"
+alias :wq="exit"
+alias :q="exit"
+alias :qa="exit"
 
 # Kubernetes Autocompletions
 autoload -Uz compinit
