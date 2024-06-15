@@ -189,6 +189,9 @@ npm install -g @redocly/cli@latest
 npm install -g @quobix/vacuum
 npm install -g newman jsonlint newman-reporter-htmlextra
 
+# Install deno - for peek.nvim
+curl -fsSL https://deno.land/install.sh | sh
+
 # FZF
 $(brew --prefix)/opt/fzf/install --all
 
