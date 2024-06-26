@@ -188,6 +188,7 @@ go install github.com/go-delve/liner@latest
 npm install -g @redocly/cli@latest
 npm install -g @quobix/vacuum
 npm install -g newman jsonlint newman-reporter-htmlextra
+npm install -g vscode-json-languageserver
 
 # Install deno - for peek.nvim
 curl -fsSL https://deno.land/install.sh | sh
