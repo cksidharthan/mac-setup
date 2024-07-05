@@ -95,3 +95,7 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # Alias to checkout master branch and pull latest changes
 alias gup='git rev-parse --is-inside-work-tree > /dev/null 2>&1 && git checkout master && git pull origin master || echo "Error: Not in a git repository or failed to checkout/pull"'
+
+# FZF
+alias nopen="nvim $(fzf -m --preview="bat --color=always {}")"
+alias view='fzf -m --preview="bat --color=always {}"'
