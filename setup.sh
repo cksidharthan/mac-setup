@@ -157,6 +157,7 @@ brew install ripgrep
 brew install gnu-sed
 brew install helm-ls
 brew install tmux
+brew install lua-language-server
 
 # Remove outdated versions from the cellar.
 echo "Running brew cleanup..."
