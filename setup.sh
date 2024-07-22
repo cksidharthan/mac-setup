@@ -184,6 +184,7 @@ go install github.com/nikolaydubina/go-cover-treemap@latest
 go install github.com/securego/gosec/v2/cmd/gosec@latest
 go install github.com/go-delve/delve/cmd/dlv@latest
 go install github.com/go-delve/liner@latest
+go install github.com/derailed/k9s@latest
 
 # Install NPM Packages
 npm install -g @redocly/cli@latest
