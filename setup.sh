@@ -227,6 +227,7 @@ cp .wezterm.lua ${HOME}
 mkdir -p ${HOME}/.config/k9s
 cp k9s/config.yaml ${HOME}/.config/k9s/config.yaml
 cp k9s/skins/myskin.yaml ${HOME}/.config/k9s/skins/myskin.yaml
+
 # move tmux conf to home
 cp .tmux.conf ${HOME}
 
