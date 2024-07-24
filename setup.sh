@@ -223,6 +223,10 @@ git clone http://github.com/cksidharthan/nvim ${HOME}/dev/learn/nvim
 # move wezterm config to home
 cp .wezterm.lua ${HOME}
 
+# move k9s config by createing a folder ~/.config/k9s
+mkdir -p ${HOME}/.config/k9s
+cp k9s/config.yaml ${HOME}/.config/k9s/config.yaml
+cp k9s/skins/myskin.yaml ${HOME}/.config/k9s/skins/myskin.yaml
 # move tmux conf to home
 cp .tmux.conf ${HOME}
 
