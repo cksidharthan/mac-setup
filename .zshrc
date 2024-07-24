@@ -65,6 +65,7 @@ export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
 export GIT_TERMINAL_PROMPT=1
 export GOSUMDB=off
 export GOPRIVATE="dev.azure.com/INGCDaaS/*,dev.azure.com/IngEurCDaaS01/*,github.com/weportfolio/*"
+export K9S_CONFIG_DIR="~/.config/k9s"
 
 # go Project commands
 alias golint="go vet ./..."
